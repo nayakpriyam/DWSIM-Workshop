@@ -1,0 +1,81 @@
+\documentclass[12pt,xcolor=table]{beamer} 
+\setbeamersize{text margin left=0.25cm,text margin right=0.25cm}
+\mathversion{bold}
+%\usepackage{paralist}
+\usepackage{beamerthemesplit}
+\usepackage{beamerthemeshadow}
+\usepackage{mathtools}	%\Longleftrightarrow
+\usepackage{chemfig}
+\definecolor{Green}{RGB}{0,0,190}
+\definecolor{Brown}{RGB}{205,0,0}
+\setbeamercolor{structure}{fg=Green}
+\setbeamercolor{alerted text}{fg=Brown}
+\logo{\includegraphics[height=0.7cm]{FOSSEE.jpeg}\hspace{9.35cm}
+\includegraphics[height=1.2cm]{IITB.png}}
+\hyphenation{phosphorylated}
+
+\begin{document}
+\sffamily \bfseries
+\title
+[Distillation Column Simulation using DWSIM]
+{Distillation Column Simulation using DWSIM}
+
+\author [Priyam Nayak]
+{\small
+  Priyam Nayak \\ Reseach Scholar \\Department of Chemical Engineering\\ Indian Institute of Technology Bombay\\ [0.1cm]
+\small 20 July 2023}
+\date{}
+\begin{frame}
+   \titlepage
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Problem: Simulation of Distillation Column}
+A 3600 kmol/h feed consisting 30\% (by mole) Benzene, 30\% Toluene and 40\% O-xylene enters a distillation column at 1 bar and 120$^\circ$C. The feed is to be separated through direct/indirect distillation column sequence such that the products are atleast 99\% pure. The column is operated at 1.3 times the minimum reflux ratio. The total condenser pressure is 1 bar and reboiler pressure is 1 bar. Using Peng-Robinson property package, simulate the distillation column.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Input Data}
+	\begin{itemize}
+		\item Components: Benzene, Toluene, O-xylene
+		\item Thermodynamic Property Package: Peng-Robinson
+		\item Feed Mass Flow Rate: 3600 kmol/h
+		\item Feed Pressure: 1 bar
+		\item Feed Temperature: 120$^\circ$C
+		\item Mole Fraction of Benzene: 0.3
+		\item Mole Fraction of Toluene: 0.3
+		\item Mole Fraction of O-xylene: 0.4
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Get in touch}
+	%\begin{Huge}
+	\begin{itemize}
+	\item \url{https://dwsim.fossee.in}
+	\item Completed Flowsheets: \url{https://dwsim.fossee.in/flowsheeting-project/completed-flowsheet}
+	\item Mail us at: \url{contact-dwsim@fossee.in}
+\end{itemize}
+%	\end{Huge}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{center}
+\begin{Huge}
+\textbf{Thanks}
+\end{Huge}
+\end{center}
+\begin{center}
+\begin{Huge}
+for your time and patience
+\end{Huge}
+\end{center}
+
+\end{frame}
+
+\end{document}

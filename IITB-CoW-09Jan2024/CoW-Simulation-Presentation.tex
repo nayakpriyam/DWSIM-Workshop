@@ -1,0 +1,302 @@
+\documentclass[10pt]{beamer}
+%\usepackage[utf8]{inputenc}
+\usepackage{multirow,rotating}
+%\usepackage{color}
+%\usepackage{hyperref}
+\usepackage{tikz-cd}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{mathtools,nccmath}%
+\usepackage{
+	%etoolbox, 
+	xparse} 
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+\usepackage{longtable}
+\usepackage{gensymb}
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs}
+\usepackage{amsmath}
+
+
+% set colors
+\definecolor{myNewColorA}{RGB}{158, 27,50}
+\definecolor{myNewColorB}{RGB}{158, 27,50}
+\definecolor{myNewColorC}{RGB}{158, 27,50} % {130,138,143}
+\setbeamercolor*{palette primary}{bg=myNewColorC}
+\setbeamercolor*{palette secondary}{bg=myNewColorB, fg = white}
+\setbeamercolor*{palette tertiary}{bg=myNewColorA, fg = white}
+\setbeamercolor*{titlelike}{fg=myNewColorA}
+\setbeamercolor*{title}{bg=myNewColorA, fg = white}
+\setbeamercolor*{item}{fg=myNewColorA}
+\setbeamercolor*{caption name}{fg=myNewColorA}
+\usefonttheme{professionalfonts}
+%\usepackage{natbib}
+\usepackage{hyperref}
+%------------------------------------------------------------
+%\titlegraphic{\includegraphics[height=0.75cm]{iitb1.png}} 
+
+% logo of my university
+\begin{filecontents*}[overwrite]{\jobname.bib}
+	
+	@article{YOON2007886,
+		title = {Heat integration analysis for an industrial ethylbenzene plant using pinch analysis},
+		journal = {Applied Thermal Engineering},
+		volume = {27},
+		number = {5},
+		pages = {886-893},
+		year = {2007},
+		issn = {1359-4311},
+		doi = {https://doi.org/10.1016/j.applthermaleng.2006.09.001},
+		author = {Sung-Geun Yoon and Jeongseok Lee and Sunwon Park}
+	}
+	
+\end{filecontents*}
+
+\usepackage[style=verbose,backend=biber]{biblatex}
+\addbibresource{\jobname.bib}
+
+\titlegraphic{%
+	\includegraphics[width=3.0cm]{iitb1.png}
+}
+
+\setbeamerfont{title}{size=\large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\footnotesize}
+\setbeamerfont{institute}{size=\footnotesize}
+\title[CL308]{Process Simulation using DWSIM}%title
+%\subtitle{ }%%subtitle
+%\author[Priyam Nayak]{Priyam Nayak - 214026014\inst{1}}%%authors
+\author[Priyam Nayak]{Priyam Nayak, Ph.D. Scholar}
+%\institute[IITB]{Indian Institute of Technology Bombay\inst{1}}
+\institute[IITB]{Indian Institute of Technology Bombay}
+\date[\textcolor{white}{DWSIM Simulation}]
+{CL308 - Course on Wheels\\ DWSIM Simulation\\ Jan 09, 2024}
+
+%------------------------------------------------------------
+%This block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+%\AtBeginSection[]
+%{
+	%  \begin{frame}
+		%    \frametitle{Contents}
+		%    \tableofcontents[currentsection]
+		%  \end{frame}
+	%}
+\AtBeginSection[]{
+	\begin{frame}
+		\vfill
+		\centering
+		\begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+			\usebeamerfont{title}\insertsectionhead\par%
+		\end{beamercolorbox}
+		\vfill
+	\end{frame}
+}
+% ------Contents below------
+%------------------------------------------------------------
+
+\begin{document}
+	
+	%The next statement creates the title page.
+	\frame{\titlepage}
+	\begin{frame}
+		\frametitle{Outline}
+		\tableofcontents
+	\end{frame}
+	
+	
+	% consider removing it if it's too redundant
+	\AtBeginSection[]
+	{
+		\begin{frame}
+			\frametitle{Table of Contents}
+			\tableofcontents[currentsection]
+		\end{frame}
+	}
+	
+	%------------------------------------------------------------
+	\section{Binary Column Distillation}
+	\begin{frame}{Problem Statement}
+		A binary mixture containing 40 mol\% methanol and 60 mol\% isopropanol is to be distilled. The mixture consists of equimolar amounts of vapor and liquid at a pressure of 1.01325 bar and a flowrate of 100 kmol/h. The desired purities are 99\%  methanol and 99\% isopropanol. The column is operated at 1.4 times the minimum reflux ratio. The toal condenser pressure is 1.01325 bar and reboiler pressure is 1.01325 bar.
+	\end{frame}
+
+\begin{frame}{Input Data}
+	\begin{itemize}
+		\item Components: Methanol-Isopropanol
+		\item Thermodynamic Property Package: NRTL
+		\item Feed Molar Flow Rate: 100 kmol/hr
+		\item Feed Pressure: 1.01325 bar
+		\item Feed Vapor Phase Mol Fraction: 0.5
+		\item Mole Fraction of Methanol: 0.4
+		\item Mole Fraction of Isopropanol: 0.6
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Column Input}
+	\begin{itemize}
+		\item Mole Fraction of LK(Methanol) in Bottoms: 0.01
+		\item Mole Fraction of HK(Isopropanol) in Distillate: 0.01
+		\item Condenser Type: Total
+		\item Condenser Pressure: 1.01325 bar
+		\item Reboiler Pressure: 1.01325 bar
+		\item $\frac{R}{R_{min}}$ = 1.4
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Shortcut Column Results}
+	\begin{itemize}
+		\item Reflux Ratio: 3.84262
+		\item Minimum Reflux Ratio: 2.74473
+		\item Actual Number of Stages: 22
+		\item Feed Stage Location: 10
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Distillation Column Input}
+	\begin{itemize}
+		\item Actual Number of Stages: 22
+		\item Feed Stage Location: 10
+		\item Reflux Ratio: 3.84262
+		\item Bottoms Flow Rate: 60.204 kmol/h
+	\end{itemize}
+\end{frame}
+
+\section{Multicomponent Distillation}
+	\begin{frame}{Problem Statement}
+		
+			A ternary mixture containing 30 mol\% methanol, 30 mol\% isopropanol and 40 mol\% n-propanol is to be distilled. The mixture consists of equimolar amounts of vapor and liquid at a pressure of 1.01325 bar and a flowrate of 100 kmol/h. The feed is to be separated through a sequence of columns such that in the first column, the composition of light key in bottoms is 1\% (by mole) and composition of heavy key is 1\% (by mole) in distillate. In the second column, the composition of light key in bottoms is 1\% (by mole) and composition of heavy key is 1\% (by mole) in distillate. The column is operated at 1.4 times the minimum reflux ratio. The toal condenser pressure is 1.01325 bar and reboiler pressure is 1.01325 bar.
+		
+%	A 100 kg/hr feed consisting 50\% (by mole) Benzene, 30\% Toluene and 20\% p-Xylene enters a distillation column at 1.01325 bar and 80$^\circ$C. The feed is to be separated through a sequence of columns such that in the first column, the composition of light key in bottoms is 0.1\% (by mole) and composition of heavy key is 1\% (by mole) in distillate. In the second column, the composition of light key in bottoms is 1\% (by mole) and composition of heavy key is 1\% (by mole) in distillate. The columns are operated at 1.3 times the minimum reflux ratio. For both the columns, the toal condenser pressure is 1.01325 bar and reboiler pressure is 1.01325 bar. Using Peng-Robinson property package, simulate the sequence of distillation column.
+	\end{frame}
+
+\begin{frame}{Input Data}
+	\begin{itemize}
+		\item Components: Methanol-Isopropanol-n-Propanol
+		\item Thermodynamic Property Package: NRTL
+		\item Feed Mass Flow Rate: 100 kmol/hr
+		\item Feed Pressure: 1.01325 bar
+		\item Feed Vapor Phase Mol Fraction: 0.5
+		\item Mole Fraction of Methanol: 0.3
+		\item Mole Fraction of Isopropanol: 0.3
+		\item Mole Fraction of n-Propanol: 0.4
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Column Input}
+	\begin{itemize}
+		\item Mole Fraction of LK(Methanol) in Bottoms: 0.01
+		\item Mole Fraction of HK(Isopropanol) in Distillate: 0.01
+		\item Condenser Type: Total
+		\item Condenser Pressure: 1.01325 bar
+		\item Reboiler Pressure: 1.01325 bar
+		\item $\frac{R}{R_{min}}$ = 1.4
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Shortcut Column-I Results}
+	\begin{itemize}
+		\item Reflux Ratio: 4.36978
+		\item Minimum Reflux Ratio: 3.12127
+		\item Actual Number of Stages: 21
+		\item Feed Stage Location: 10
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Distillation Column-I Input}
+	\begin{itemize}
+		\item Actual Number of Stages: 21
+		\item Feed Stage Location: 10
+		\item Reflux Ratio: 4.36978
+		\item Bottoms Flow Rate: 70.4077 kmol/h
+	\end{itemize}
+\end{frame}
+
+
+
+
+\section{Conversion/Yield Reactor}
+\begin{frame}{Problem Statement}
+100 kg/h of ethyl benzene at 260 \degree C and 1.5 bar is decomposed to form styrene and hydrogen. Products are at 250 \degree C and 1.2 bar. Assume the reaction to be vapour phase and 80\% conversion of ethyl benzene takes place. Using Peng-Robinson model of thermodynamics, simulate the conversion reactor.
+
+\vspace{3ex}
+
+Repeat the above problem with conversion as function of temperature (where T is in K) provided as 
+\begin{equation*}
+	f(T) = 0.0425(T+248)
+\end{equation*}
+\end{frame}
+
+\begin{frame}{Input Data}
+	\begin{itemize}
+		\item Components: Ethylbenzene-Styrene-Hydrogen
+		\item Thermodynamic Property Package: Peng-Robinson
+		\item Feed Mass Flow Rate: 100 kg/hr
+		\item Feed Pressure: 1.52 bar
+		\item Feed Temperature: 260$^\circ$C
+		\item Mole Fraction of Ethylbenzene: 1
+		\item Mole Fraction of Styrene: 0
+		\item Mole Fraction of Hydrogen: 0
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Reaction and Reactor Input}
+	\begin{itemize}
+		\item Reaction: Ethylbenzene $\rightarrow$ Styrene + Hydrogen
+		\item $X_{ethylbenzene}$: 80
+		\item Reactor Outlet Temperature: 250$^\circ$C
+		\item Reactor Pressure Drop: 0.3 bar
+	\end{itemize}
+\end{frame}
+
+
+\section{Kinetic Reactor}
+\begin{frame}{Problem Statement}
+	2000 kg/h of feed consisting of pure acetone at 100 \degree C and 2 bar enters a plug flow reactor (volume of 200 $m^3$ and 10 $m$ length) to decompose into ketene and methane. The reaction rate is 
+	\begin{equation*}
+		-r_A = kP_{acetone} \frac{kmol}{m^3.hr}
+	\end{equation*}
+	where $P_{acetone}$ is the partial pressure of the Acetone in $Pa$. The reaction is assumed to follow arrhenius rate law where the pre-exponential factor is equal to 0.916 $hr^{-1}$ and the activation energy is equal to
+	45000 $\frac{kJ}{kmol}$. The reactor is operated at 150 \degree C. Assuming the reaction to be in vapor phase and following
+	Peng-Robinson property package, simulate a PFR.
+\end{frame}
+
+\begin{frame}{Input Data}
+	\begin{itemize}
+		\item Components: Acetone-Ketene-Methane
+		\item Thermodynamic Property Package: Peng-Robinson
+		\item Feed Mass Flow Rate: 2000 kg/hr
+		\item Feed Pressure: 2 bar
+		\item Feed Temperature: 100$^\circ$C
+		\item Mole Fraction of Acetone: 1
+		\item Mole Fraction of Ketene: 0
+		\item Mole Fraction of Methane: 0
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Reaction and Reactor Input}
+	\begin{itemize}
+		\item Reaction: Acetone $\rightarrow$ Ketene + Methane
+		\item Pre-exponential factor: 0.916 $hr^{-1}$
+		\item Activation Energy: 45000 $\frac{kJ}{kmol}$
+		\item Reactor Volume: 200 $m^3$
+		\item Reactor Length: 10 m
+		\item Reactor Outlet Temperature: 150$^\circ$C
+	\end{itemize}
+\end{frame}
+ 
+	\section*{Acknowledgement}  
+	\begin{frame}
+		
+		\textcolor{myNewColorA}{\huge{\centerline{Thank you!}}}
+		\vspace*{0.5cm}
+		
+		%\textcolor{myNewColorA}{\Large{\centerline{E-mail: 214026014@iitb.ac.in}}}
+		
+	\end{frame}
+	
+\end{document}
